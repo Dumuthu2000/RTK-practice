@@ -16,11 +16,15 @@ const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-            state.cart = [...state.cart, action.payload],
-            state.totalPrice = state.totalPrice + action.payload.price
+            state.cart = [...state.cart, action.payload];
+            state.totalPrice = state.totalPrice + action.payload.price;
+        },
+        removeCartItem: (state, action) => {
+            state.cart = state.cart.filter((_, index) => index !== action.payload.index );
+            state.totalPrice = state.totalPrice - action.payload.price;
         }
     },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeCartItem } = cartSlice.actions;
 export default cartSlice.reducer;
